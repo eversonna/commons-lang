@@ -12,8 +12,23 @@ pipeline {
       }
     }
     stage('Finish') {
+      parallel {
+        stage('Finish') {
+          steps {
+            echo 'You\'ve done it!'
+          }
+        }
+        stage('Print some More') {
+          steps {
+            echo 'Hey'
+          }
+        }
+      }
+    }
+    stage('Build Job') {
       steps {
-        echo 'You\'ve done it!'
+        build 'doj-ldap-service'
+        echo 'It Built!'
       }
     }
   }
