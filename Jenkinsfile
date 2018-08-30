@@ -6,29 +6,33 @@ pipeline {
         git 'https://github.com/eversonna/commons-lang.git'
       }
     }
-    stage('Build') {
+    stage('Build Commons-Lang') {
       steps {
         bat 'mvn package'
       }
     }
-    stage('Finish') {
+    stage('Build Supporting Jobs') {
       parallel {
-        stage('Finish') {
+        stage('Build DOJ LDAP Service') {
           steps {
-            echo 'You\'ve done it!'
+            build 'doj-ldap-service'
           }
         }
-        stage('Print some More') {
+        stage('Build DOJ ACISS Client') {
           steps {
-            echo 'Hey'
+            build 'doj-aciss-client'
+          }
+        }
+        stage('Build DOJ Reports Service') {
+          steps {
+            build 'doj-reports-service'
           }
         }
       }
     }
-    stage('Build Job') {
+    stage('Finish') {
       steps {
-        build 'doj-ldap-service'
-        echo 'It Built!'
+        echo 'Finished up'
       }
     }
   }
