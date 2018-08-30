@@ -11,5 +11,10 @@ pipeline {
         bat 'mvn package'
       }
     }
+    stage('Finish') {
+      steps {
+        echo 'You\'ve done it!'
+      }
+    }
   }
 }
