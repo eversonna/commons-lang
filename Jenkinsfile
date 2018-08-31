@@ -11,23 +11,9 @@ pipeline {
         bat 'mvn package'
       }
     }
-    stage('Build Supporting Jobs') {
-      parallel {
-        stage('Build DOJ LDAP Service') {
-          steps {
-            build 'doj-ldap-service'
-          }
-        }
-        stage('Build DOJ ACISS Client') {
-          steps {
-            build 'doj-aciss-client'
-          }
-        }
-        stage('Build DOJ Reports Service') {
-          steps {
-            build 'doj-reports-service'
-          }
-        }
+    stage('Build DOJ ACISS Client') {
+      steps {
+        build 'doj-aciss-client'
       }
     }
     stage('Request Permission') {
