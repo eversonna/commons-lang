@@ -30,9 +30,9 @@ pipeline {
         }
       }
     }
-    stage('Finish') {
+    stage('Request Permission') {
       steps {
-        echo 'Finished up'
+        input(message: 'Ready to proceed?', ok: 'OK?')
       }
     }
   }
